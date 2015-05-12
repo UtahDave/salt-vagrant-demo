@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     master_config.vm.provision :salt do |salt|
       salt.master_config = "saltstack/etc/master"
       salt.install_type = "git"
-      salt.install_args = '2014.7'
+      salt.install_args = 'v2015.5.0'
       salt.install_master = true
       salt.no_minion = true
       salt.verbose = true
@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     minion_config.vm.provision :salt do |salt|
       salt.minion_config = "saltstack/etc/minion1"
       salt.install_type = "git"
-      salt.install_args = '2014.7'
+      salt.install_args = 'v2015.5.0'
       salt.verbose = true
     end
   end
@@ -46,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     minion_config.vm.provision :salt do |salt|
       salt.minion_config = "saltstack/etc/minion2"
       salt.install_type = "git"
-      salt.install_args = '2014.7'
+      salt.install_args = 'v2015.5.0'
       salt.verbose = true
     end
   end
