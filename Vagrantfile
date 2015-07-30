@@ -10,6 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     master_config.vm.host_name = 'saltmaster.local'
     master_config.vm.network "private_network", ip: "192.168.50.10"
     master_config.vm.synced_folder "saltstack/salt/", "/srv/salt"
+    master_config.ssh.insert_key = true
 
     master_config.vm.provision :salt do |salt|
       salt.master_config = "saltstack/etc/master"
@@ -24,21 +25,29 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       salt.install_master = true
       salt.no_minion = true
       salt.verbose = true
+      salt.bootstrap_options = "-P"
     end
+    
+    
   end
 
   config.vm.define :minion1 do |minion_config|
     minion_config.vm.box = "ubuntu/trusty64"
     minion_config.vm.host_name = 'saltminion1.local'
     minion_config.vm.network "private_network", ip: "192.168.50.11"
+    minion_config.ssh.insert_key = true
 
     minion_config.vm.provision :salt do |salt|
-      salt.minion_config = "saltstack/etc/minion1"
+      #salt.minion_config = "saltstack/etc/minion1"
       salt.minion_key = "saltstack/keys/minion1.pem"
       salt.minion_pub = "saltstack/keys/minion1.pub"
       salt.install_type = "stable"
       salt.verbose = true
+      salt.bootstrap_options = "-P"
     end
+    
+    minion_config.vm.provision "shell",
+        inline: "cp /etc/salt/minion{,-dist} && cp /vagrant/saltstack/etc/minion1 /etc/salt/minion"
   end
 
   config.vm.define :minion2 do |minion_config|
@@ -49,14 +58,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #minion_config.vm.box = "chef/centos-6.5"
     minion_config.vm.host_name = 'saltminion2.local'
     minion_config.vm.network "private_network", ip: "192.168.50.12"
+    minion_config.ssh.insert_key = true 
 
     minion_config.vm.provision :salt do |salt|
-      salt.minion_config = "saltstack/etc/minion2"
+      #salt.minion_config = "saltstack/etc/minion2"
       salt.minion_key = "saltstack/keys/minion2.pem"
       salt.minion_pub = "saltstack/keys/minion2.pub"
       salt.install_type = "stable"
       salt.verbose = true
+      salt.bootstrap_options = "-P"
     end
+    
+    minion_config.vm.provision "shell",
+        inline: "cp /etc/salt/minion{,-dist} && cp /vagrant/saltstack/etc/minion2 /etc/salt/minion"
   end
 
 end
