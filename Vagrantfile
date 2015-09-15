@@ -15,6 +15,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       salt.master_config = "saltstack/etc/master"
       salt.master_key = "saltstack/keys/master_minion.pem"
       salt.master_pub = "saltstack/keys/master_minion.pub"
+      salt.minion_key = "saltstack/keys/master_minion.pem"
+      salt.minion_pub = "saltstack/keys/master_minion.pub"
       salt.seed_master = {
                           "minion1" => "saltstack/keys/minion1.pub",
                           "minion2" => "saltstack/keys/minion2.pub"
