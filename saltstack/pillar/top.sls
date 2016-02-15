@@ -1,3 +1,6 @@
 base:
-  '*':
-    - default
+
+  'minion*':
+    - prod.mysql
+    - prod.app
+    - prod.nginx
