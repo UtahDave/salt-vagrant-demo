@@ -5,6 +5,9 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provider "virtualbox" do |vb|
+      vb.memory = 1024
+  end
   config.vm.define :master do |master_config|
     master_config.vm.box = "ubuntu/trusty64"
     master_config.vm.host_name = 'saltmaster.local'
