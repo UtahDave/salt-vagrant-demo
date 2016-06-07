@@ -1,0 +1,26 @@
+{% set APP_ENV = salt['pillar.get']('app:APP_ENV', '') -%}
+{% set APP_DEBUG = salt['pillar.get']('app:APP_DEBUG', '') -%}
+{% set APP_KEY = salt['pillar.get']('app:APP_KEY', '') -%}
+{% set APP_LOCALE = salt['pillar.get']('app:APP_LOCALE', '') -%}
+{% set APP_FALLBACK_LOCALE = salt['pillar.get']('app:APP_FALLBACK_LOCALE', '') -%}
+{% set DB_CONNECTION = salt['pillar.get']('app:DB_CONNECTION', '') -%}
+{% set DB_HOST = salt['pillar.get']('app:DB_HOST', '') -%}
+{% set DB_PORT = salt['pillar.get']('app:DB_PORT', '') -%}
+{% set DB_DATABASE = salt['pillar.get']('app:DB_DATABASE', '') -%}
+{% set DB_USERNAME = salt['pillar.get']('app:DB_USERNAME', '') -%}
+{% set DB_PASSWORD = salt['pillar.get']('app:DB_PASSWORD', '') -%}
+
+
+APP_ENV= {{ APP_ENV }}
+APP_DEBUG={{ APP_DEBUG }}
+APP_KEY={{ APP_KEY }}
+
+APP_LOCALE={{ APP_LOCALE }} 
+APP_FALLBACK_LOCALE= {{ APP_FALLBACK_LOCALE }}
+
+DB_CONNECTION={{ DB_CONNECTION }}
+DB_HOST={{ DB_HOST }}
+DB_PORT={{ DB_PORT }}
+DB_DATABASE={{ DB_DATABASE }}
+DB_USERNAME={{ DB_USERNAME }}
+DB_PASSWORD={{ DB_PASSWORD }}
