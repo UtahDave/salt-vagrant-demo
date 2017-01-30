@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     master_config.vm.synced_folder "saltstack/pillar/", "/srv/pillar"
 
     master_config.vm.provision :salt do |salt|
+      salt.bootstrap_options = "-P"
       salt.master_config = "saltstack/etc/master"
       salt.master_key = "saltstack/keys/master_minion.pem"
       salt.master_pub = "saltstack/keys/master_minion.pub"
@@ -41,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     minion_config.vm.network "private_network", ip: "192.168.50.11"
 
     minion_config.vm.provision :salt do |salt|
+      salt.bootstrap_options = "-P"
       salt.minion_config = "saltstack/etc/minion1"
       salt.minion_key = "saltstack/keys/minion1.pem"
       salt.minion_pub = "saltstack/keys/minion1.pub"
@@ -61,6 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     minion_config.vm.network "private_network", ip: "192.168.50.12"
 
     minion_config.vm.provision :salt do |salt|
+      salt.bootstrap_options = "-P"
       salt.minion_config = "saltstack/etc/minion2"
       salt.minion_key = "saltstack/keys/minion2.pem"
       salt.minion_pub = "saltstack/keys/minion2.pub"
