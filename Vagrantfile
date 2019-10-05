@@ -9,6 +9,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   net_ip = "192.168.50"
 
   config.vm.define :master, primary: true do |master_config|
+    master_config.vm.provider "libvirt" do |lb|
+        lb.uri = 'qemu:///system'
+        lb.host = "master"
+        lb.memory = "2048"
+        lb.cpus = 1
+        lb.nested = true
+    end
     master_config.vm.provider "virtualbox" do |vb|
         vb.memory = "2048"
         vb.cpus = 1
@@ -47,6 +54,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ["minion2",    "#{net_ip}.12",    "1024",    os ],
   ].each do |vmname,ip,mem,os|
     config.vm.define "#{vmname}" do |minion_config|
+      minion_config.vm.provider "libvirt" do |lb|
+          lb.uri = 'qemu:///system'
+          lb.host = "#{vmname}"
+          lb.memory = "#{mem}"
+          lb.cpus = 1
+          lb.nested = true
+      end
       minion_config.vm.provider "virtualbox" do |vb|
           vb.memory = "#{mem}"
           vb.cpus = 1
