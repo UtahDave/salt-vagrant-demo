@@ -37,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       salt.no_minion = true
       salt.verbose = true
       salt.colorize = true
-      salt.bootstrap_options = "-P -c /tmp"
+      salt.bootstrap_options = "-P -c /tmp -x python3"
     end
   end
 
@@ -64,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         salt.install_type = "stable"
         salt.verbose = true
         salt.colorize = true
-        salt.bootstrap_options = "-P -c /tmp"
+        salt.bootstrap_options = "-P -c /tmp -x python3"
       end
     end
   end
